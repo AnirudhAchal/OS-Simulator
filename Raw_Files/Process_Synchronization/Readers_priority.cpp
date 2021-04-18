@@ -1,4 +1,4 @@
-//Process Synchronization : Readers_Writers problem with writers priority
+//Process Synchronization : Readers_Writers problem with reader's priority
 //Akanksha : 191CS106
 
 #include<iostream>
@@ -45,10 +45,10 @@ void merge(Document *p, Document *l, Document *r, int lc, int rc)
     i = j = k =0;
     while(j<lc&&k<rc)
     {
-        if(l[j].at <= r[k].at)
-            p[i++] = l[j++];
-        else
+        if(r[k].at <= l[j].at)
             p[i++] = r[k++];
+        else
+            p[i++] = l[j++];
     }
     while(j<lc)
         p[i++] = l[j++];
@@ -59,7 +59,7 @@ void merge(Document *p, Document *l, Document *r, int lc, int rc)
 //merge sort algorithm
 void sort_at(Document *p, int size)   
 {
-    // Document *l, *r;
+    Document *l, *r;
     int i,j,mid;
 
     if(size<2)
@@ -68,10 +68,8 @@ void sort_at(Document *p, int size)
     i = j = 0;
     mid = size/2;
 
-    // l = (Document*)malloc(mid*sizeof(Document));
-    // r = (Document*)malloc((size-mid)*sizeof(Document));  
-    Document l[mid];
-    Document r[size-mid];
+    l = (Document*)malloc(mid*sizeof(Document));
+    r = (Document*)malloc((size-mid)*sizeof(Document));  
 
     while(i<mid)
     {
@@ -270,7 +268,7 @@ int main(void)
     int n, m, i, j, mark, curr_time, t;
     int S=0, R; 
     queue* head = NULL;
-    //Document *b, *r, *w;
+    Document *b, *r, *w;
 
     //S: semaphore variable
     //curr_time: current time
@@ -279,8 +277,7 @@ int main(void)
     cout<<"Enter number of readers: ";
     cin>>m;
 
-    //r = (Document*)malloc(m*sizeof(Document));
-    Document r[m];
+    r = (Document*)malloc(m*sizeof(Document));
     if(m>0)
     {
         cout<<"\nEnter arrival time and burst time of readers: "<<endl;
@@ -292,10 +289,7 @@ int main(void)
             cin >> r[i].bt;
 
             r[i].wr = 0;
-            r[i].s = r[i].w = 0;
             r[i].index = i;
-            r[i].wt = 0;
-            r[i].q = -1;
 
         }
 
@@ -304,8 +298,7 @@ int main(void)
     cout<<"\nEnter number of writers: ";
     cin>>n;
 
-    //w = (Document*)malloc(n*sizeof(Document));
-    Document w[n];
+    w = (Document*)malloc(n*sizeof(Document));
     if(n>0)
     {
         cout<<"\nEnter arrival time and burst time of writers: "<<endl;
@@ -317,20 +310,21 @@ int main(void)
             cin >> w[i].bt;
 
             w[i].wr = 1;
-            w[i].s = w[i].w = 0;
             w[i].index = i;
-            w[i].wt = 0;
-            w[i].q = -1;
 
         }
 
     }
     
-    //b = (Document*)malloc((m+n)*sizeof(Document));
-    Document b[n+m];
+    b = (Document*)malloc((m+n)*sizeof(Document));
+
     sort_at(w,n);
     sort_at(r,m);
     merge(b,w,r,n,m);
+
+    cout << "\n---" << endl;
+    for(int i=0; i<n+m ;i++)
+        cout << b[i].wr <<" " << b[i].index <<endl;
 
     S = 1;   
     R = 0;   
@@ -352,46 +346,51 @@ int main(void)
         
         if(b[i].wr==1)
         {
-            R = 0;
-            wait(S);
-            curr_time = writer(b,b[i].index,i, curr_time);
-            signal(S);
-        }   
-        else
-        {
-            for(j=i+1; b[j].w != 0;j++)
+            for(j=i+1; b[j].w != 0 ;j++)
             {
                 if(b[j].s == 1 )
                     continue;
-                if(b[j].wr == 1)
+                if(b[j].wr == 0)
                 {
                     i = j;
-                    R = 0;
+                    R = 1;
                     wait(S);
-                    curr_time = writer(b,b[i].index,i,curr_time);
+                    curr_time = reader(R,b,b[i].index,i,curr_time);
                     signal(S);
+                    R = 1;
+                    if(b[i].start_t == b[i].at)
+                        cout<<"Reader "<< b[i].index+1 <<" arrived at time " << b[i].start_t << " and started reading.\n " <<endl;
+                    else
+                        cout<<"Reader "<< b[i].index+1 <<" started reading at time "<< b[i].start_t << ".\n" <<endl;
+                    head = enqueue(b[i].ct, b[i].index, head);
+                    b[i].q = 1;
                     break;
                 }    
             }
-            if(mark == i)
+            if(mark==i)
             {
+                R = 0;
                 wait(S);
-                curr_time = reader(R,b,b[i].index,i,curr_time);
+                curr_time = writer(b,b[i].index,i, curr_time);
                 signal(S);
-                R = 1;
-                if(b[i].start_t == b[i].at)
-                    cout<<"Reader "<< b[i].index+1 <<" arrived at time " << b[i].start_t << " and started reading.\n " <<endl;
-                else
-                    cout<<"Reader "<< b[i].index+1 <<" started reading at time "<< b[i].start_t << ".\n" <<endl;
-                head = enqueue(b[i].ct, b[i].index, head);
-                b[i].q = 1;
             }
-            
+        }   
+        else
+        {
+            wait(S);
+            curr_time = reader(R,b,b[i].index,i,curr_time);
+            signal(S);
+            R = 1;
+            if(b[i].start_t == b[i].at)
+                cout<<"Reader "<< b[i].index+1 <<" arrived at time " << b[i].start_t << " and started reading.\n " <<endl;
+            else
+                cout<<"Reader "<< b[i].index+1 <<" started reading at time "<< b[i].start_t << ".\n" <<endl;
+            head = enqueue(b[i].ct, b[i].index, head);
+            b[i].q = 1;
         }
 
-
         t = 0;
-        for(j=0; b[j].at<curr_time && j<n+m;j++)
+        for(j=0; b[j].at <= curr_time && j<n+m;j++)
         {    
             if(b[j].s == 1)
                 continue;
@@ -424,11 +423,13 @@ int main(void)
                 cout << "Writer "<< b[j].index + 1 << " arrived at time " << b[j].at << " and has to wait.\n"<<endl;
                 b[j].w = 1;
             }
-            else
+            else if(b[j].wr==0 && b[j].at < curr_time)
             {
-                while(head != NULL && head->ct <= b[j].at)
-                    head = dequeue(head);
                 cout << "Reader "<< b[j].index + 1 << " arrived at time " << b[j].at << " and has to wait.\n"<<endl;
+                b[j].w =1;
+            }
+            else if(b[j].wr==0)
+            {
                 b[j].w = 1;
             }
 
