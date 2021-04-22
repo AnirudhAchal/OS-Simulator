@@ -55,7 +55,7 @@ int main()
     float d;
     printf("******* 191CS102 ********:\n");
     printf("******* LRU  ********:\n");
-    printf(" Please enter number of frames:\n");
+    printf("Please enter number of frames:\n");
     scanf("%d",&nf);
     int table_frame[nf];
     for(i=0;i<nf;i++)
@@ -63,27 +63,27 @@ int main()
         table_frame[i]=-1;
     }
 
-    printf("enter total number of page requests please:\n");
+    printf("\nEnter total number of page requests please:\n");
     scanf("%d",&n);
     int pages[n];
-    printf("enter pages\n");
+    printf("\nEnter pages\n\n");
     for(i=0;i<n;i++)
     {
+        printf("Enter page request : ");
         scanf("%d",&pages[i]);
     }
 
     int count_tracker=0;
-    printf("position of the frame table after each request is as follows:\n");
+    printf("\nPosition of the frame table after each request is as follows:\n");
     for(i=0;i<n;i++)
     {
-        printf("page table after request from %2d || ",pages[i]);
+        printf("\nCurrent status of frames after page request from %2d || ",pages[i]);
         if(!present_or_not(table_frame,nf,pages[i]))
         {
              int position_noted = find_position_here(table_frame,nf,pages,i,n);
              table_frame[position_noted]=pages[i];
-
              printing(table_frame,nf);
-             printf("page fault!\n");
+             printf(" page fault!\n");
              count_tracker++; //increment the value if page fault found.
              continue;
         }
