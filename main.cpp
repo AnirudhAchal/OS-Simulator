@@ -1,42 +1,43 @@
 // CPU Scheduling
-#include "CPU_Scheduling/FCFS.h"
-#include "CPU_Scheduling/SJF.h"
-#include "CPU_Scheduling/LJF.h"
-#include "CPU_Scheduling/SRTF.h"
-#include "CPU_Scheduling/LRTF.h"
-#include "CPU_Scheduling/round_robin.h"
-#include "CPU_Scheduling/HRRN.h"
-#include "CPU_Scheduling/nonpreemptive_priority.h"
-#include "CPU_Scheduling/preemptive_priority.h"
+#include "1. CPU_Scheduling/FCFS.h"
+#include "1. CPU_Scheduling/SJF.h"
+#include "1. CPU_Scheduling/LJF.h"
+#include "1. CPU_Scheduling/SRTF.h"
+#include "1. CPU_Scheduling/LRTF.h"
+#include "1. CPU_Scheduling/round_robin.h"
+#include "1. CPU_Scheduling/HRRN.h"
+#include "1. CPU_Scheduling/nonpreemptive_priority.h"
+#include "1. CPU_Scheduling/preemptive_priority.h"
 
 // Process Synchronization
-#include "Process_Synchronization/Producer_Consumer.h"
-#include "Process_Synchronization/Readers_priority.h"
-#include "Process_Synchronization/Writers_priority.h"
+#include "2. Process_Synchronization/Producer_Consumer.h"
+#include "2. Process_Synchronization/Readers_priority.h"
+#include "2. Process_Synchronization/Writers_priority.h"
 
-// Page Replacement
-#include "Page_Replacement/FIFO.h"
-#include "Page_Replacement/LRU.h"
-#include "Page_Replacement/MRU.h"
 
 // Resource Allocation Deadlock
-#include "Resource_Allocation_Deadlock/bankers.h"
+#include "3. Resource_Allocation_Deadlock/bankers.h"
 
 // Memory Management
-#include "Memory_Management/mft_best.h"
-#include "Memory_Management/mft_first.h"
-#include "Memory_Management/mft_worst.h"
-#include "Memory_Management/mvt_best.h"
-#include "Memory_Management/mvt_first.h"
-#include "Memory_Management/mvt_worst.h"
+#include "4. Memory_Management/mft_best.h"
+#include "4. Memory_Management/mft_first.h"
+#include "4. Memory_Management/mft_worst.h"
+#include "4. Memory_Management/mvt_best.h"
+#include "4. Memory_Management/mvt_first.h"
+#include "4. Memory_Management/mvt_worst.h"
+
+// Page Replacement
+#include "5. Page_Replacement/FIFO.h"
+#include "5. Page_Replacement/LRU.h"
+#include "5. Page_Replacement/MRU.h"
 
 // Disk Scheduling
-#include "Disk_Scheduling/FCFS.h"
-#include "Disk_Scheduling/SCAN.h"
-#include "Disk_Scheduling/CSCAN.h"
-#include "Disk_Scheduling/LOOK.h"
-#include "Disk_Scheduling/CLOOK.h"
-#include "Disk_Scheduling/SSTF.h"
+#include "6. Disk_Scheduling/FCFS.h"
+#include "6. Disk_Scheduling/SCAN.h"
+#include "6. Disk_Scheduling/CSCAN.h"
+#include "6. Disk_Scheduling/LOOK.h"
+#include "6. Disk_Scheduling/CLOOK.h"
+#include "6. Disk_Scheduling/SSTF.h"
 
 using namespace std;
 
