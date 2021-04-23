@@ -53,29 +53,6 @@ void Process_fcfs :: scheduling(class Process_fcfs *p,int size)
     }
     float avg_tat= float(float(total_turn_arround_time)/size); //calculation of average turn arround time
     float avg_wt= float(float(total_waiting_time)/size); //calculation of average waiting time
-    // cout<<"\nProcess_fcfs_ID\tArrival Time\tBurst Time\tTurn Arround Time\tWaiting Time\n";
-    // for(i=0;i<size;i++)
-    // {
-    //     //printing the outputs
-    //     cout<<"\t"<<p[i].p_id<<"\t\t\t"<<p[i].arrival_time<<"\t\t\t\t"<<p[i].burst_time<<"\t\t\t"<<p[i].turnarround_time<<"\t\t\t\t"<<p[i].waiting_time<<endl;
-    // }
-
-    cout << "\nGantt Chart: " << endl;
-    cout << "-----------\n" << endl;
-    cout << " |";
-    for(int i=0; i < size ;i++)
-    {
-        cout << setw(10) << left << "  Process" << setw(4) << left <<p[i].p_id << " | ";
-    }
-
-
-    cout << endl;
-    cout <<"0";
-    for(int i=0; i < size ;i++)
-    {
-        cout << setw(17) << right << p[i].completion_time;
-    }
-
     cout << "\n\nFinal timing results: " << endl;
     cout << "--------------------- \n" << endl;
 
