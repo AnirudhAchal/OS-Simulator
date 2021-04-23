@@ -58,8 +58,9 @@ int findpos(int table_frame[],int nf,int pages[],int curr,int np)
     return returnpos;
 }
 
-int main()
+void OPT()
 {
+	cout << "\nRunning Page Replacement Optimal\n\n";
     //nf-number of frames
     int n,nf,i,pos=0; float d;
     printf("*** Optimal Page Replacement ***\n");

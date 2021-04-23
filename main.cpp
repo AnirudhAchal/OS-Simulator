@@ -20,6 +20,7 @@
 // Resource Allocation Deadlock
 #include "3. Resource_Allocation_Deadlock/bankers.h"
 
+
 // Memory Management
 #include "4. Memory_Management/mft_best.h"
 #include "4. Memory_Management/mft_first.h"
@@ -32,14 +33,18 @@
 #include "5. Page_Replacement/FIFO.h"
 #include "5. Page_Replacement/LRU.h"
 #include "5. Page_Replacement/MRU.h"
+#include "5. Page_Replacement/OPT.h"
+
+// Paging
+#include "6. Paging/Normal_Paging.h"
 
 // Disk Scheduling
-#include "6. Disk_Scheduling/FCFS.h"
-#include "6. Disk_Scheduling/SCAN.h"
-#include "6. Disk_Scheduling/CSCAN.h"
-#include "6. Disk_Scheduling/LOOK.h"
-#include "6. Disk_Scheduling/CLOOK.h"
-#include "6. Disk_Scheduling/SSTF.h"
+#include "7. Disk_Scheduling/FCFS.h"
+#include "7. Disk_Scheduling/SCAN.h"
+#include "7. Disk_Scheduling/CSCAN.h"
+#include "7. Disk_Scheduling/LOOK.h"
+#include "7. Disk_Scheduling/CLOOK.h"
+#include "7. Disk_Scheduling/SSTF.h"
 
 using namespace std;
 
@@ -51,8 +56,16 @@ void print_menu()
     cout << "3. Resource Allocation Deadlock\n";
     cout << "4. Memory Management\n";
     cout << "5. Page Replacement\n";
-    cout << "6. Disk Scheduling\n";
+    cout << "6. Paging\n";
+    cout << "7. Disk Scheduling\n";
     cout << "Enter any other key to exit.\n\n";
+}
+
+void print_menu_paging()
+{
+    cout << "\nPaging Main Menu\n";
+    cout << "1. Normal Paging\n";
+    cout << "Enter any other key to return to main menu\n\n";
 }
 
 void print_menu_CPU_scheduling()
@@ -78,7 +91,7 @@ void print_menu_process_synchronization()
     cout << "3. Writers Priority\n";
     cout << "4. Dining Philosopher\n";
     cout << "5. Sleeping Barber\n";
-    cout << "Enter any other key to return to main menu\n\n";
+    cout << "Enter any other key to return t    o main menu\n\n";
 }
 
 void print_menu_bankers()
@@ -94,6 +107,7 @@ void print_menu_page_replacement()
     cout << "1. FIFO\n";
     cout << "2. LRU\n";
     cout << "3. MRU\n";
+    cout << "4. Optimal\n";
     cout << "Enter any other key to return to main menu\n\n";
 }
 
@@ -217,9 +231,19 @@ int main()
             if(choice == 1) fifo();
             else if (choice == 2) lru();
             else if (choice == 3) mru();
+            else if (choice == 4) OPT();
             else continue;
         }
         else if(choice == 6)
+        {
+            print_menu_paging();
+            cout << "Enter choice: ";
+            cin >> choice;
+
+            if(choice == 1) normal_paging();
+            else continue;
+        }
+        else if(choice == 7)
         {
             print_menu_disk_scheduling();
             cout << "Enter choice: ";
