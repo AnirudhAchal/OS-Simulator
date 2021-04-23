@@ -74,13 +74,13 @@ void avg_time_SJF(size_t t,int p_id[],int at[],int bt[])
     calc_wt_tat_SJF(p_id,at,bt,wt,tat,finish_time,t); //calling calc_wt_tat_SJF function
     //printing the output
     // cout<<"process ID\t"<<"Arrival time\t"<<"Burst Time\t"<<"Waiting Time\t"<<"Finishing Time\n";
-    // for(int i=0;i<t;i++)
-    // {
-    //     total_wt+=wt[i]; //calculating total waiting time
-    //     total_tat+=tat[i]; //calculating total turn arround time
-    //     cout<<"\t"<<p_id[i]<<"\t\t\t"<<at[i]<<"\t\t\t"<<bt[i]<<"\t\t\t"<<wt[i]<<"\t\t\t"<<finish_time[i]<<endl;
-    // }
-    // cout<<endl;
+    for(int i=0;i<t;i++)
+    {
+        total_wt+=wt[i]; //calculating total waiting time
+        total_tat+=tat[i]; //calculating total turn arround time
+        //cout<<"\t"<<p_id[i]<<"\t\t\t"<<at[i]<<"\t\t\t"<<bt[i]<<"\t\t\t"<<wt[i]<<"\t\t\t"<<finish_time[i]<<endl;
+    }
+    cout<<endl;
     cout << "\n\nFinal timing results: " << endl;
     cout << "--------------------- \n" << endl;
 
@@ -92,8 +92,8 @@ void avg_time_SJF(size_t t,int p_id[],int at[],int bt[])
         cout << setw(13) << left << p_id[i] << setw(10) << left << at[i] << setw(10) << left << bt[i] << setw(10) << left << finish_time[i] << setw(10) << left << tat[i] << setw(10) << left << wt[i] << endl;
     }
     
-    cout<<"Average TurnArround time is :\t"<< double(total_tat/t)<<endl;
-    cout<<"Average Waiting time is     :\t"<< double((total_wt)/t)<<endl;
+    cout<<"Average TurnArround time is :\t"<< (double)total_tat/t<<endl;
+    cout<<"Average Waiting time is     :\t"<< (double)total_wt/t<<endl;
 
     return;
 }
