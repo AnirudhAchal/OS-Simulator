@@ -104,5 +104,8 @@ void dining_philosopher(){
             }
         }
       }
+      if(process_completed==n) cout<<"All people have consumed "<<endl;
+      total_time++;
+      cout<<endl;
   }
 }
