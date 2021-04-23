@@ -25,7 +25,7 @@ void ljf()
     cout<<"\nEnter arrival time of process "<<i+1<<" : ";
     p[i].id=i+1;
     cin>>p[i].at;
-    cout<<"\nEnter burst time of process "<<i+1<<" : ";
+    cout<<"Enter burst time of process "<<i+1<<" : ";
     cin>>p[i].bt;
     p[i].completed=0;
   }

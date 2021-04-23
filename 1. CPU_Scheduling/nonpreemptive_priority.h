@@ -51,7 +51,7 @@ void priority_nonpreemp:: solve()
     int order[n];
     //taking input for each process about arrival time,burst time and priority
     for(int i = 0; i < n; i++) {
-        cout<<"Enter arrival time of process "<<i+1<<" : ";
+        cout<<"\nEnter arrival time of process "<<i+1<<" : ";
         cin>>p[i].AT;
         cout<<"Enter burst time of process "<<i+1<<" : ";
         cin>>p[i].BT;

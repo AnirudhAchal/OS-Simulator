@@ -26,7 +26,7 @@ void lrtf()
       cin>>p[i].id;
     cout<<"\nEnter arrival time of process "<<p[i].id<<" : ";
     cin>>p[i].at;
-    cout<<"\nEnter burst time of process "<<p[i].id<<" : ";
+    cout<<"Enter burst time of process "<<p[i].id<<" : ";
     cin>>p[i].bt;
     p[i].bt_r=p[i].bt;
     p[i].completed=0;
