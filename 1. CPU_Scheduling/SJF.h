@@ -80,5 +80,6 @@ void sjf()
      }
 
      cout<<"average waiting time ="<<awt<<" average turnaround time ="<<atat;  //average waiting time and turn around time
+}
   
  
