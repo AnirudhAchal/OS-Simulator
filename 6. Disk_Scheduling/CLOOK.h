@@ -88,7 +88,7 @@ again:
     if (p >= nt || p < 0)
     {
         cout << "Invalid track location.\n";
-        goto here;
+        goto again;
     }
     cout << "Direction towards \n1.LEFT\n2.RIGHT\nEnter choice : ";
     cin >> dir;
