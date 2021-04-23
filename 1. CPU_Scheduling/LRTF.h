@@ -8,6 +8,7 @@ using namespace std;
 void lrtf()
 {
     cout << "\nRunning CPU Scheduling LRTF\n";
+    printf("\n******* LJF ********\n");
     struct proc{
       int id,at,bt,bt_r,ct,wt,tat,completed;
     };
@@ -98,6 +99,7 @@ void lrtf()
   cout<<"\nAverage waiting time is: "<<(float)avg_wt/n;
   cout<<"\nAverage turn around time is: "<<(float)avg_tat/n;
 
+    printf("\n\n******* DONE ********\n");
 
 
 }

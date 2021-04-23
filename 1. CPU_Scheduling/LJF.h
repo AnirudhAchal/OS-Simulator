@@ -7,7 +7,8 @@ using namespace std;
 
 void ljf()
 {
-    cout << "\nRunning CPU Scheduling LJF\n";
+    cout << "\nRunning CPU Scheduling LJF\n\n";
+    printf("******* LJF ********\n");
     struct proc{
       int id,at,bt,ct,wt,tat,completed;
     };
@@ -81,5 +82,6 @@ void ljf()
     cout<<"\nAverage turn around time is: "<<(float)avg_tat/n<<"\n";
 
 
+    printf("\n******* DONE ********\n");
 
 }

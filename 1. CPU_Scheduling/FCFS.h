@@ -80,8 +80,10 @@ void Process_fcfs::initialization()
 }
 void fcfs_cpu() {
     cout << "\nRunning CPU Scheduling FCFS\n\n";
+    printf("******* FCFS ********\n");
     Process_fcfs p;
     p.initialization(); //calling initialization function
+    printf("\n******* DONE ********\n");
 }
 
 

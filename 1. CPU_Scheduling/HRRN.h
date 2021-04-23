@@ -160,6 +160,8 @@ void HRRN(Process *p, int n)
 void hrrn()
 {
     cout << "\nRunning CPU Scheduling HRRN\n\n";
+    printf("******* HRRN ********\n");
+
     int n, total_wt, total_tat, hrrn, curr_time, mark;
     struct Process *p;
 
@@ -189,5 +191,7 @@ void hrrn()
     sort_at(p,n);  //sorts the processes in increasing order of their arrival time
 
     HRRN(p,n);     //job scheduling
+
+    printf("\n******* DONE ********\n");
 
 }
