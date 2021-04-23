@@ -286,9 +286,9 @@ int writers_priority(void)
         cout<<"\nEnter arrival time and burst time of readers: "<<endl;
         for(i=0;i<m;i++)
         {
-            cout << "\nReader " << i <<" arrival time: ";
+            cout << "\nReader " << i+1 <<" arrival time: ";
             cin >> r[i].at;
-            cout << "Reader " << i <<" burst time  : ";
+            cout << "Reader " << i+1 <<" burst time  : ";
             cin >> r[i].bt;
 
             r[i].wr = 0;
