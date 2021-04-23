@@ -283,9 +283,9 @@ int readers_priority(void)
         cout<<"\nEnter arrival time and burst time of reader_readers: "<<endl;
         for(i=0;i<m;i++)
         {
-            cout << "\nReader " << i <<" arrival time: ";
+            cout << "\nReader " << i+1 <<" arrival time: ";
             cin >> r[i].at;
-            cout << "Reader " << i <<" burst time  : ";
+            cout << "Reader " << i+1 <<" burst time  : ";
             cin >> r[i].bt;
 
             r[i].wr = 0;
@@ -322,9 +322,9 @@ int readers_priority(void)
     sort_at_reader(r,m);
     merge_reader(b,w,r,n,m);
 
-    cout << "\n---" << endl;
-    for(int i=0; i<n+m ;i++)
-        cout << b[i].wr <<" " << b[i].index <<endl;
+    // cout << "\n---" << endl;
+    // for(int i=0; i<n+m ;i++)
+    //     cout << b[i].wr <<" " << b[i].index <<endl;
 
     S = 1;   
     R = 0;   

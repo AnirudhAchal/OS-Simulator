@@ -33,7 +33,10 @@ void process_rr::scheduling(int n,class process_rr *p,int pro,int qt)
             }
             p[k + 1]= key;
         }
-    cout<<"\nProcessID\tArrivalTime\tBurstTime\tTurnAroundTime\t\tWaitingTime\n";
+    cout << "\nFinal timing results: " << endl;
+    cout << "--------------------- \n" << endl;
+    cout << setw(13) << left << "Process No" << setw(10) << left << "AT" << setw(10) << left << "BT" << setw(10) << left << "CT" << setw(10) << left << "TAT" << setw(10) << left << "WT" << endl;
+    cout << setw(13) << left << "----------" << setw(10) << left << "--" << setw(10) << left << "--" << setw(10) << left << "--" << setw(10) << left << "---" << setw(10) << left << "--" << endl;
     for(sum=p[0].arrival_time, i = 0; pro!=0;)
         {
             if(p[i].temp <= qt && p[i].temp > 0) //comparing burst time with time quantum
@@ -51,7 +54,8 @@ void process_rr::scheduling(int n,class process_rr *p,int pro,int qt)
             {
                 pro--; //decreasing the process_rr
                 int wt_ans=sum-p[i].arrival_time-p[i].burst_time;
-                cout<<"\t"<< p[i].pid<<"\t\t"<<p[i].arrival_time<<"\t\t"<<p[i].burst_time<<"\t\t"<<sum-p[i].arrival_time<<"\t\t"<<wt_ans<<endl; //printing the output
+                //cout<<"\t"<< p[i].pid<<"\t\t"<<p[i].arrival_time<<"\t\t"<<p[i].burst_time<<"\t\t"<<sum-p[i].arrival_time<<"\t\t"<<wt_ans<<endl; //printing the output
+                cout << setw(13) << left << p[i].pid << setw(10) << left << p[i].arrival_time << setw(10) << left << p[i].burst_time << setw(10) << left << sum << setw(10) << left << sum-p[i].arrival_time << setw(10) << left << wt_ans << endl;
                 wt = wt+sum-p[i].arrival_time-p[i].burst_time; //calculating total wt
                 tat = tat+sum-p[i].arrival_time; //calculating total turn arround time
                 count =0;
@@ -72,8 +76,12 @@ void process_rr::scheduling(int n,class process_rr *p,int pro,int qt)
     // finding the average waiting time and Turn Around time
     float avg_wt = (float) wt/n;
     float avg_tat = (float) tat/n;
-    cout<<"\nAverage Turn Around Time: \t"<< avg_tat;
-    cout<<"\nAverage Waiting Time: \t"<<avg_wt<<endl;
+    // cout<<"\nAverage Turn Around Time: \t"<< avg_tat;
+    // cout<<"\nAverage Waiting Time: \t"<<avg_wt<<endl;
+
+    cout<<"\nAverage TurnAround Time : "<<avg_tat<<endl;
+    cout<<"Average Waiting Time      : "<<avg_wt<<endl;
+
     return;
 }
 void process_rr::initialization()

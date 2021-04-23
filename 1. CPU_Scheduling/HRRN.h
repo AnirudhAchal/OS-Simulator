@@ -14,6 +14,7 @@ struct Process{
     int tat;           //turn around time
     int wt;            //waiting time
     int no;            //process number
+    int st;            //start time
     float rr;          //response ratio
 };
 
@@ -68,17 +69,40 @@ void print_output(Process *p, int n)        //prints Gantt chart
     cout << " |";
     for(int i=0; i < n ;i++)
     {
-        cout << setw(10) << left << "  Process" << setw(4) << left <<p[i].no << " | ";
+        if(i==0 && p[i].at > 0)
+        {
+            cout << setw(10) << left << " Idle CPU" << setw(4) << left << " " <<" | ";
+            cout << setw(10) << left << "  Process" << setw(4) << left <<p[i].no << " | ";
+        }
+        else if( i>0 && p[i].st > p[i-1].ct)
+        {
+            cout << setw(10) << left << " Idle CPU" << setw(4) << left << " " <<" | ";
+            cout << setw(10) << left << "  Process" << setw(4) << left <<p[i].no << " | ";
+        }
+        else
+            cout << setw(10) << left << "  Process" << setw(4) << left <<p[i].no << " | ";
     }
 
-    sort_at(p,n);
 
     cout << endl;
     cout <<"0";
     for(int i=0; i < n ;i++)
     {
-        cout << setw(17) << right << p[i].ct;
+        if(i==0 && p[i].at > 0)
+        {
+            cout << setw(17) << right << p[i].st;
+            cout << setw(17) << right << p[i].ct;
+        }
+        else if( i>0 && p[i].st > p[i-1].ct)
+        {
+            cout << setw(17) << right << p[i].st;
+            cout << setw(17) << right << p[i].ct;
+        }
+        else
+            cout << setw(17) << right << p[i].ct;
     }
+
+    sort_at(p,n);
 
     cout << "\n\n";
 
@@ -111,6 +135,7 @@ void HRRN(Process *p, int n)
     curr_time = p[0].ct  = p[0].bt + p[0].at;     //initialize required variables  
     total_wt = 0;
     p[0].tat = total_tat = p[0].ct - p[0].at;
+    p[0].st = p[0].at;
 
     for(int i=1; i<n; i++)
     {
@@ -130,6 +155,10 @@ void HRRN(Process *p, int n)
             
         }
 
+        if(curr_time < p[i].at)
+            curr_time = p[i].at;
+            
+        p[mark].st = curr_time;
         curr_time += p[mark].bt;
         p[mark].ct = curr_time;
         p[mark].tat = p[mark].ct - p[mark].at;
@@ -149,8 +178,8 @@ void HRRN(Process *p, int n)
 
     print_output(p,n);
 
-    cout << "\n\nAverage turn around time (TAT) : " << (float)total_tat / n << endl;
-    cout << "Average waiting time (WT)      : " << (float)total_wt / n << endl;
+    cout<<"\nAverage TurnArround Time : "<< (float)total_tat / n;
+    cout<<"\nAverage Waiting Time     : "<< (float)total_wt / n;
 
     cout << endl;
 
@@ -184,6 +213,7 @@ void hrrn()
         p[i].wt = 0;    
         p[i].no = i; 
         p[i].rr = 1;
+        p[i].st = -1;
 
         cout << endl;
     }

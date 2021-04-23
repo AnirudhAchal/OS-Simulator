@@ -1,6 +1,7 @@
 //Longest Job First Scheduling
 #include<iostream>
 #include<stdio.h>
+#include<iomanip>
 
 using namespace std;
 
@@ -22,10 +23,10 @@ void ljf()
 
   for(int i=0;i<n;i++)
   {
-    cout<<"\nEnter arrival time of P"<<i+1<<": ";
-      p[i].id=i+1;
+    cout<<"\nEnter arrival time of process "<<i+1<<" : ";
+    p[i].id=i+1;
     cin>>p[i].at;
-    cout<<"\nEnter burst time of P"<<i+1<<": ";
+    cout<<"Enter burst time of process "<<i+1<<" : ";
     cin>>p[i].bt;
     p[i].completed=0;
   }
@@ -72,14 +73,24 @@ void ljf()
     }
    
 
-  cout<<"P_id\t"<<"AT\t"<<"BT\t"<<"CT\t"<<"WT\t"<<"TAT\t"<<"\n";
-  for(int i=0;i<n;i++)
+  // cout<<"P_id\t"<<"AT\t"<<"BT\t"<<"CT\t"<<"WT\t"<<"TAT\t"<<"\n";
+  // for(int i=0;i<n;i++)
+  // {
+  //   cout<<p[i].id<<"\t"<<p[i].at<<"\t"<<p[i].bt<<"\t"<<p[i].ct<<"\t"<<p[i].wt<<"\t"<<p[i].tat<<"\t"<<"\n";
+  // }
+
+  cout << "\nFinal timing results: " << endl;
+  cout << "--------------------- \n" << endl;
+  cout << setw(13) << left << "Process No" << setw(10) << left << "AT" << setw(10) << left << "BT" << setw(10) << left << "CT" << setw(10) << left << "TAT" << setw(10) << left << "WT" << endl;
+  cout << setw(13) << left << "----------" << setw(10) << left << "--" << setw(10) << left << "--" << setw(10) << left << "--" << setw(10) << left << "---" << setw(10) << left << "--" << endl;
+  for(int i=0; i<n ; i++)
   {
-    cout<<p[i].id<<"\t"<<p[i].at<<"\t"<<p[i].bt<<"\t"<<p[i].ct<<"\t"<<p[i].wt<<"\t"<<p[i].tat<<"\t"<<"\n";
+    cout << setw(13) << left << p[i].id << setw(10) << left << p[i].at << setw(10) << left << p[i].bt << setw(10) << left << p[i].ct << setw(10) << left << p[i].tat << setw(10) << left << p[i].wt << endl;
   }
 
-  cout<<"\nAverage waiting time is: "<<(float)avg_wt/n;
-    cout<<"\nAverage turn around time is: "<<(float)avg_tat/n<<"\n";
+  cout<<"\nAverage TurnAround time : "<<(float)avg_tat/n;
+  cout<<"\nAverage Waiting time    : "<<(float)avg_wt/n;
+  
 
 
     printf("\n******* DONE ********\n");
