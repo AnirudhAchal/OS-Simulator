@@ -88,13 +88,13 @@ void process_rr::initialization()
 {
     //taking input of number of process_rres
     int i,n,pro,qt;
-    cout<<"Enter the number of process_rres for roundrobin scheduling : ";
+    cout<<"Enter the number of processes for roundrobin scheduling : ";
     cin>>n;
     struct process_rr p[n];
     pro=n;
     for(i=0; i<n; i++)   //taking input of arrival and burst time
     {
-        cout<<"Enter arrival time And burst time of process_rr "<< i+1<<" : ";
+        cout<<"Enter arrival time And burst time of process "<< i+1<<" : ";
         cin>>p[i].arrival_time>>p[i].burst_time;
         p[i].temp = p[i].burst_time;
         p[i].pid = i+1;
