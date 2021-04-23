@@ -1,6 +1,7 @@
 // CPU Scheduling : SJF
 
 #include<iostream>
+#include<iomanip>
 
 using namespace std;
 void sjf()
@@ -10,18 +11,18 @@ void sjf()
       int n,temp,tt=0,min,d,i,j;
       float atat=0,awt=0,stat=0,swt=0;
 
-      cout<<"enter no of process"<<endl;
+      cout<<"Enter no of process : ";
       cin>>n;
       int a[n],b[n],e[n],tat[n],wt[n];
   
       for(i=0;i<n;i++)
       {
-            cout<<"enter arival time ";       //input
+            cout<<"Enter arival time : ";       //input
             cin>>a[i];
       }
       for(i=0;i<n;i++)
       {
-            cout<<"enter brust time ";      //input
+            cout<<"Enter brust time : ";      //input
             cin>>b[i];
       }
       for(i=0;i<n;i++)
@@ -71,12 +72,23 @@ void sjf()
       }
       atat=stat/n;
       awt=swt/n;
-      cout<<"Process  Arrival-time(s)  Burst-time(s)  Waiting-time(s)  Turnaround-time(s)\n";
+//       cout<<"Process  Arrival-time(s)  Burst-time(s)  Waiting-time(s)  Turnaround-time(s)\n";
 
-    for(i=0;i<n;i++)
-    {
-    cout<<"P"<<i+1<<"              "<<a[i]<<"                "<<b[i]<<"                  "<<wt[i]<<"               "<<tat[i]<<endl;
-    }
+//     for(i=0;i<n;i++)
+//     {
+//     cout<<"P"<<i+1<<"              "<<a[i]<<"                "<<b[i]<<"                  "<<wt[i]<<"               "<<tat[i]<<endl;
+//     }
 
-    cout<<"awt="<<awt<<" atat="<<atat;  //average waiting time and turn around time
+//     cout<<"awt="<<awt<<" atat="<<atat;  //average waiting time and turn around time
+  
+      cout << "\nFinal timing results: " << endl;
+      cout << "--------------------- \n" << endl;
+      cout << setw(13) << left << "Process No" << setw(10) << left << "AT" << setw(10) << left << "BT" << setw(10) << left << "CT" << setw(10) << left << "TAT" << setw(10) << left << "WT" << endl;
+      cout << setw(13) << left << "----------" << setw(10) << left << "--" << setw(10) << left << "--" << setw(10) << left << "--" << setw(10) << left << "---" << setw(10) << left << "--" << endl;
+      for(int i=0; i<n ; i++)
+      {
+        cout << setw(13) << left << i+1 << setw(10) << left << a[i] << setw(10) << left << b[i] << setw(10) << left << tat[i]+a[i] << setw(10) << left << tat[i] << setw(10) << left << wt[i] << endl;
+      }
+      cout<<"\nAverage TurnAround Time : "<<atat<<endl;
+      cout<<"Average Waiting Time      : "<<awt<<endl;
 }

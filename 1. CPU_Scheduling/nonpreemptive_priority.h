@@ -51,11 +51,11 @@ void priority_nonpreemp:: solve()
     int order[n];
     //taking input for each process about arrival time,burst time and priority
     for(int i = 0; i < n; i++) {
-        cout<<"Enter arrival time of process "<<i+1<<": ";
+        cout<<"Enter arrival time of process "<<i+1<<" : ";
         cin>>p[i].AT;
-        cout<<"Enter burst time of process "<<i+1<<": ";
+        cout<<"Enter burst time of process "<<i+1<<" : ";
         cin>>p[i].BT;
-        cout<<"Enter priority of the process "<<i+1<<": ";
+        cout<<"Enter priority of the process "<<i+1<<" : ";
         cin>>p[i].priority;
         p[i].pid = i+1;
         cout<<endl;
@@ -149,15 +149,23 @@ void priority_nonpreemp:: solve()
     cout<<endl<<endl;
 
     //printing the final result
+    // cout << "\nFinal timing results: " << endl;
+    // cout << "--------------------- \n" << endl;
+    // cout<<"#P\t"<<"AT\t"<<"BT\t"<<"PRI\t"<<"ST\t"<<"CT\t"<<"TAT\t"<<"WT\t"<<"\n"<<endl;
+
+    // for(int i = 0; i < n; i++) {
+    //     cout<<p[i].pid<<"\t"<<p[i].AT<<"\t"<<p[i].BT<<"\t"<<p[i].priority<<"\t"<<p[i].ST<<"\t"<<p[i].CT<<"\t"<<p[i].TT<<"\t"<<p[i].WT<<"\t"<<"\n"<<endl;
+    // }
     cout << "\nFinal timing results: " << endl;
     cout << "--------------------- \n" << endl;
-    cout<<"#P\t"<<"AT\t"<<"BT\t"<<"PRI\t"<<"ST\t"<<"CT\t"<<"TAT\t"<<"WT\t"<<"\n"<<endl;
-
-    for(int i = 0; i < n; i++) {
-        cout<<p[i].pid<<"\t"<<p[i].AT<<"\t"<<p[i].BT<<"\t"<<p[i].priority<<"\t"<<p[i].ST<<"\t"<<p[i].CT<<"\t"<<p[i].TT<<"\t"<<p[i].WT<<"\t"<<"\n"<<endl;
+    cout << setw(13) << left << "Process No" << setw(10) << left << "AT" << setw(10) << left << "BT" << setw(10) << left << "CT" << setw(10) << left << "TAT" << setw(10) << left << "WT" << endl;
+    cout << setw(13) << left << "----------" << setw(10) << left << "--" << setw(10) << left << "--" << setw(10) << left << "--" << setw(10) << left << "---" << setw(10) << left << "--" << endl;
+    for(int i=0; i<n ; i++)
+    {
+      cout << setw(13) << left << p[i].pid << setw(10) << left << p[i].AT << setw(10) << left << p[i].BT << setw(10) << left << p[i].CT << setw(10) << left << p[i].TT << setw(10) << left << p[i].WT << endl;
     }
-    cout<<"\nAverage Turnaround Time = "<<avg_TT<<endl;
-    cout<<"Average Waiting Time = "<<avg_WT<<endl;
+    cout<<"\nAverage TurnAround Time : "<<avg_TT<<endl;
+    cout<<"Average Waiting Time      : "<<avg_WT<<endl;
 }
 
 //Driver Code

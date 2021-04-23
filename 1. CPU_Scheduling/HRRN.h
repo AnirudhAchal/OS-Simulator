@@ -71,7 +71,6 @@ void print_output(Process *p, int n)        //prints Gantt chart
         cout << setw(10) << left << "  Process" << setw(4) << left <<p[i].no << " | ";
     }
 
-    sort_at(p,n);
 
     cout << endl;
     cout <<"0";
@@ -79,6 +78,8 @@ void print_output(Process *p, int n)        //prints Gantt chart
     {
         cout << setw(17) << right << p[i].ct;
     }
+
+    sort_at(p,n);
 
     cout << "\n\n";
 
@@ -149,8 +150,8 @@ void HRRN(Process *p, int n)
 
     print_output(p,n);
 
-    cout << "\n\nAverage turn around time (TAT) : " << (float)total_tat / n << endl;
-    cout << "Average waiting time (WT)      : " << (float)total_wt / n << endl;
+    cout<<"\nAverage TurnArround Time : "<< (float)total_tat / n;
+    cout<<"\nAverage Waiting Time     : "<< (float)total_wt / n;
 
     cout << endl;
 

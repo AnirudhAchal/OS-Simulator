@@ -72,8 +72,12 @@ void process_rr::scheduling(int n,class process_rr *p,int pro,int qt)
     // finding the average waiting time and Turn Around time
     float avg_wt = (float) wt/n;
     float avg_tat = (float) tat/n;
-    cout<<"\nAverage Turn Around Time: \t"<< avg_tat;
-    cout<<"\nAverage Waiting Time: \t"<<avg_wt<<endl;
+    // cout<<"\nAverage Turn Around Time: \t"<< avg_tat;
+    // cout<<"\nAverage Waiting Time: \t"<<avg_wt<<endl;
+
+    cout<<"\nAverage TurnAround Time : "<<avg_tat<<endl;
+    cout<<"Average Waiting Time      : "<<avg_wt<<endl;
+
     return;
 }
 void process_rr::initialization()

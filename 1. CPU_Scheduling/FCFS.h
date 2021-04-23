@@ -4,6 +4,7 @@
 //
 
 #include <iostream>
+#include<iomanip>
 using namespace std;
 
 class Process_fcfs
@@ -52,27 +53,39 @@ void Process_fcfs :: scheduling(class Process_fcfs *p,int size)
     }
     float avg_tat= float(float(total_turn_arround_time)/size); //calculation of average turn arround time
     float avg_wt= float(float(total_waiting_time)/size); //calculation of average waiting time
-    cout<<"\nProcess_fcfs_ID\tArrival Time\tBurst Time\tTurn Arround Time\tWaiting Time\n";
-    for(i=0;i<size;i++)
+    // cout<<"\nProcess_fcfs_ID\tArrival Time\tBurst Time\tTurn Arround Time\tWaiting Time\n";
+    // for(i=0;i<size;i++)
+    // {
+    //     //printing the outputs
+    //     cout<<"\t"<<p[i].p_id<<"\t\t\t"<<p[i].arrival_time<<"\t\t\t\t"<<p[i].burst_time<<"\t\t\t"<<p[i].turnarround_time<<"\t\t\t\t"<<p[i].waiting_time<<endl;
+    // }
+
+    cout << "\nFinal timing results: " << endl;
+    cout << "--------------------- \n" << endl;
+
+    cout << setw(13) << left << "Process No" << setw(10) << left << "AT" << setw(10) << left << "BT" << setw(10) << left << "CT" << setw(10) << left << "TAT" << setw(10) << left << "WT" << endl;
+    cout << setw(13) << left << "----------" << setw(10) << left << "--" << setw(10) << left << "--" << setw(10) << left << "--" << setw(10) << left << "---" << setw(10) << left << "--" << endl;
+
+    for(int i=0; i<size ; i++)
     {
-        //printing the outputs
-        cout<<"\t"<<p[i].p_id<<"\t\t\t"<<p[i].arrival_time<<"\t\t\t\t"<<p[i].burst_time<<"\t\t\t"<<p[i].turnarround_time<<"\t\t\t\t"<<p[i].waiting_time<<endl;
+        cout << setw(13) << left << p[i].p_id << setw(10) << left << p[i].arrival_time << setw(10) << left << p[i].burst_time << setw(10) << left << p[i].completion_time << setw(10) << left << p[i].turnarround_time << setw(10) << left << p[i].waiting_time << endl;
     }
-    cout<<"Average Waiting Time :\t"<<avg_wt;
-    cout<<"\nAverage TurnArround Time :\t"<<avg_tat<<endl;
+
+    cout<<"\nAverage TurnArround Time : "<<avg_tat;
+    cout<<"\nAverage Waiting Time     : "<<avg_wt << endl;
     return;
 }
 void Process_fcfs::initialization()
 {
     int size; //taking input of number of processes
-    cout<<"enter the number of cpu process : \t";
+    cout<<"Enter the number of processes : ";
     cin>>size;
     class Process_fcfs p[size]; //creating a array of number of process size
     for(int i=0;i<size;i++)
     {
         //taking input of arrival time and burst time of processes
         p[i].p_id=i+1;
-        cout<<"enter the arrival time and burst time for process :\t"<<p[i].p_id<<endl;
+        cout<<"\nEnter the arrival time and burst time for process "<< p[i].p_id << " : ";
         cin>>p[i].arrival_time>>p[i].burst_time;
     }
     scheduling(p, size); //calling our schedulling function
