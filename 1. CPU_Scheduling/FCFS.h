@@ -60,7 +60,23 @@ void Process_fcfs :: scheduling(class Process_fcfs *p,int size)
     //     cout<<"\t"<<p[i].p_id<<"\t\t\t"<<p[i].arrival_time<<"\t\t\t\t"<<p[i].burst_time<<"\t\t\t"<<p[i].turnarround_time<<"\t\t\t\t"<<p[i].waiting_time<<endl;
     // }
 
-    cout << "\nFinal timing results: " << endl;
+    cout << "\nGantt Chart: " << endl;
+    cout << "-----------\n" << endl;
+    cout << " |";
+    for(int i=0; i < size ;i++)
+    {
+        cout << setw(10) << left << "  Process" << setw(4) << left <<p[i].p_id << " | ";
+    }
+
+
+    cout << endl;
+    cout <<"0";
+    for(int i=0; i < size ;i++)
+    {
+        cout << setw(17) << right << p[i].completion_time;
+    }
+
+    cout << "\n\nFinal timing results: " << endl;
     cout << "--------------------- \n" << endl;
 
     cout << setw(13) << left << "Process No" << setw(10) << left << "AT" << setw(10) << left << "BT" << setw(10) << left << "CT" << setw(10) << left << "TAT" << setw(10) << left << "WT" << endl;
@@ -85,8 +101,10 @@ void Process_fcfs::initialization()
     {
         //taking input of arrival time and burst time of processes
         p[i].p_id=i+1;
-        cout<<"\nEnter the arrival time and burst time for process "<< p[i].p_id << " : ";
-        cin>>p[i].arrival_time>>p[i].burst_time;
+        cout<<"\nEnter the arrival time for process "<< p[i].p_id << " : ";
+        cin>>p[i].arrival_time;
+        cout<<"Enter the burst time for process "<< p[i].p_id << " : ";
+        cin>>p[i].burst_time;
     }
     scheduling(p, size); //calling our schedulling function
     return;
