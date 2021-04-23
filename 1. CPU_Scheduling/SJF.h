@@ -2,7 +2,6 @@
 //  main.cpp
 //  sjf
 //
-//  Created by Apurba Ranjan Mohapatra on 17/04/21.
 //
 
 #include<iostream>
