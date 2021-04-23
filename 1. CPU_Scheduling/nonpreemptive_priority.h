@@ -171,7 +171,9 @@ void priority_nonpreemp:: solve()
 //Driver Code
 void nonpreemptive_priority() {
     cout << "\nRunning CPU Scheduling Non-Preemptive Priority\n\n"; 
+    printf("******* Non-Preemptive Priority ********\n\n");
     priority_nonpreemp p;
     p.solve();
+    printf("\n******* DONE ********\n");
 }
 

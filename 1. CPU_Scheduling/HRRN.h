@@ -189,7 +189,7 @@ void HRRN(Process *p, int n)
 void hrrn()
 {
     cout << "\nRunning CPU Scheduling HRRN\n\n";
-    printf("******* HRRN ********\n");
+    printf("******* HRRN ********\n\n");
 
     int n, total_wt, total_tat, hrrn, curr_time, mark;
     struct Process *p;

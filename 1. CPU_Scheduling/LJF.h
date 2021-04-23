@@ -9,7 +9,7 @@ using namespace std;
 void ljf()
 {
     cout << "\nRunning CPU Scheduling LJF\n\n";
-    printf("******* LJF ********\n");
+    printf("******* LJF ********\n\n");
     struct proc{
       int id,at,bt,ct,wt,tat,completed;
     };

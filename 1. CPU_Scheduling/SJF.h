@@ -7,6 +7,7 @@ using namespace std;
 void sjf()
 {
     cout << "\nRunning CPU Scheduling SJF\n\n";
+    printf("******* SJF ********\n\n");
 
       int n,temp,tt=0,min,d,i,j;
       float atat=0,awt=0,stat=0,swt=0;
@@ -91,4 +92,5 @@ void sjf()
       }
       cout<<"\nAverage TurnAround Time : "<<atat<<endl;
       cout<<"Average Waiting Time      : "<<awt<<endl;
+    printf("\n******* DONE ********\n");
 }

@@ -14,7 +14,7 @@
 #include "2. Process_Synchronization/Readers_priority.h"
 #include "2. Process_Synchronization/Writers_priority.h"
 #include "2. Process_Synchronization/dining_philosopher.h"
-//#include "2. Process_Synchronization/sleeping_barber.h"
+#include "2. Process_Synchronization/sleeping_barber.h"
 
 
 // Resource Allocation Deadlock
@@ -77,7 +77,7 @@ void print_menu_process_synchronization()
     cout << "2. Readers Priority\n";
     cout << "3. Writers Priority\n";
     cout << "4. Dining Philosopher\n";
-    //cout << "5. Sleeping Barber\n";
+    cout << "5. Sleeping Barber\n";
     cout << "Enter any other key to return to main menu\n\n";
 }
 
@@ -164,7 +164,7 @@ int main()
             else if (choice == 2) readers_priority();
             else if (choice == 3) writers_priority();
             else if (choice == 4) dining_philosopher();
-            // else if (choice == 5) sleeping_barber();
+            else if (choice == 5) sleeping_barber();
             else continue;
         }
         else if(choice == 3)

@@ -38,7 +38,7 @@ void* thread1(void *arg){
           }
           else{
             c[x].flag = 3;
-            cout << "At t = " << total_time << " ,customer " << x << " left shaking his head " << endl;
+            cout << "At t = " << total_time << " ,customer " << x << " left the barber shop without haircut" << endl;
           }
         }
       }
@@ -53,6 +53,7 @@ void* thread1(void *arg){
   }
   // End of CS
   sem_post(&mutex1);
+  return NULL;
 }
 
 void sleeping_barber(){

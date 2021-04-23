@@ -7,6 +7,7 @@ using namespace std;
 void srtf()
 {
     cout << "\nRunning CPU Scheduling SRTF\n\n";
+    printf("******* SRTF ********\n\n");
     
     struct proc{
       int id,at,bt,bt_r,ct,wt,tat,completed;
@@ -97,5 +98,6 @@ void srtf()
   cout<<"\nAverage Waiting time is: "<<(float)avg_wt/n;
 
 
+    printf("\n******* DONE ********\n");
 
 }

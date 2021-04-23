@@ -107,8 +107,9 @@ void process_rr::initialization()
 }
 void rr()
 {
-
     cout << "\nRunning CPU Scheduling Round Robin\n\n";
+    printf("******* Round Robin ********\n\n");
     process_rr P;
     P.initialization(); //calling our initialization function
+    printf("******* DONE ********\n");
 }

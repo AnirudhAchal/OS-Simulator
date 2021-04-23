@@ -172,7 +172,9 @@ void priority_preemp:: solve()
 }
 void preemptive_priority() {
     cout << "\nRunning CPU Scheduling Preemptive Priority\n\n"; 
+    printf("******* Non-Preemptive Priority ********\n\n");
     priority_preemp p;
     p.solve();
+    printf("\n******* DONE ********\n");
 }
 
