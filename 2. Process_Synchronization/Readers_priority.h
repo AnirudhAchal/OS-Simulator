@@ -9,42 +9,42 @@ using namespace std;
 //Document_reader_reader class indicates information about reader_reader/writer_reader
 class Document_reader_reader{
     public:
-        int at;               // arrival time     
-        int bt;               // burst time 
-        int ct;               // complete time 
-        int wt;               // wait_readering time  
-        int start_t;          // start time 
-        int index;            // index of reader_reader/writer_reader  
-        int wr;               // if wr = 1  then writer_reader else reader_reader 
-        int w;                // indicates if a reader_reader/writer_reader is wait_readering if w = 1    
-        int s;                // indicates if a reader_reader/writer_reader completed the task     
-        int print;            // to keep track of print statment for wait_readering 
-        int q;                // only for reader_readers: indicates if a reader_reader is reading or not
+        int at_r;               // arrival time     
+        int bt_r;               // burst time 
+        int ct_r;               // complete time 
+        int wt_r;               // waiting time  
+        int start_t_r;          // start time 
+        int index_r;            // index of reader_reader/writer_reader  
+        int wr_r;               // if wr_r = 1  then writer_reader else reader_reader 
+        int w_r;                // indicates if a reader_reader/writer_reader is wait_readering if w_r = 1    
+        int s_r;                // indicates if a reader_reader/writer_reader completed the task     
+        int print_r;            // to keep track of print statment for wait_readering 
+        int q_r;                // only for readers: indicates if a reader is reading or not
 
         Document_reader_reader()
         {
-            s = 0;
-            w = 0;
-            wt = 0;
-            q = -1;
+            s_r = 0;
+            w_r = 0;
+            wt_r = 0;
+            q_r = -1;
         }
 };
 
-//to store information about reader_readers who are reading
+//to store information about readers who are reading
 struct queue_reader{
     int ct;
     int index;
     queue_reader *next;
 };
 
-//merge_reader two sorted arrays of reader_readers and writer_readers
+//merge_reader two sorted arrays of readers and writer
 void merge_reader(Document_reader_reader *p, Document_reader_reader *l, Document_reader_reader *r, int lc, int rc) 
 {
     int i,j,k;
     i = j = k =0;
     while(j<lc&&k<rc)
     {
-        if(r[k].at <= l[j].at)
+        if(r[k].at_r <= l[j].at_r)
             p[i++] = r[k++];
         else
             p[i++] = l[j++];
@@ -103,9 +103,9 @@ void print_table_reader(Document_reader_reader *b,int n, int m)
     j = 0;
     for(int i=0; j<m ; i++)
     {
-        if(b[i].wr == 0)
+        if(b[i].wr_r == 0)
         {
-            cout << setw(13) << left << b[i].index+1 << setw(7) << left << b[i].at << setw(7) << left << b[i].bt << setw(7) << left << b[i].ct <<endl;
+            cout << setw(13) << left << b[i].index_r+1 << setw(7) << left << b[i].at_r << setw(7) << left << b[i].bt_r << setw(7) << left << b[i].ct_r <<endl;
             j++;
         }
     }
@@ -118,9 +118,9 @@ void print_table_reader(Document_reader_reader *b,int n, int m)
     j = 0;
     for(int i=0; j<n ; i++)
     {
-        if(b[i].wr == 1)
+        if(b[i].wr_r == 1)
         {
-            cout << setw(13) << left << b[i].index+1 << setw(7) << left << b[i].at << setw(7) << left << b[i].bt << setw(7) << left << b[i].ct <<endl;
+            cout << setw(13) << left << b[i].index_r+1 << setw(7) << left << b[i].at_r << setw(7) << left << b[i].bt_r << setw(7) << left << b[i].ct_r <<endl;
             j++;
         }
     }
@@ -128,7 +128,7 @@ void print_table_reader(Document_reader_reader *b,int n, int m)
 }
 
 
-//to enqueue_reader_reader reader_reader who starts reading
+//to enqueue reader who starts reading
 queue_reader* enqueue_reader_reader(int ct, int index, queue_reader *head)
 {
     queue_reader *temp, *temp1;
@@ -168,7 +168,7 @@ queue_reader* enqueue_reader_reader(int ct, int index, queue_reader *head)
     return head;
 }
 
-//to dequeue_reader_reader reader_reader who completes reading
+//to dequeue reader who completes reading
 queue_reader* dequeue_reader_reader(queue_reader *head)
 {
     queue_reader *temp;
@@ -200,62 +200,62 @@ void signal_reader(int S)
 }
  
 
-//writer_reader function to modify curr_time, R if writer_reader is writing
+//writer_reader function to modify curr_time, R if writer is writing
 int writer_reader(Document_reader_reader *b ,int x, int i, int curr_time)  
 {
     cout<<"Writer "<<x+1<<" started writing at time "<< curr_time << ".\n" <<endl;
-    b[i].start_t = curr_time;
-    curr_time += b[i].bt;
+    b[i].start_t_r = curr_time;
+    curr_time += b[i].bt_r;
     
-    b[i].ct = curr_time;
-    b[i].s = 1;
-    b[i].w = -1;
+    b[i].ct_r = curr_time;
+    b[i].s_r = 1;
+    b[i].w_r = -1;
     return curr_time;
 }
 
 
-//reader_reader function to modify curr_time, R if reader_reader is reading
+//reader_reader function to modify curr_time, R if reader is reading
 int reader_reader(int R, Document_reader_reader *b, int x, int i, int curr_time)  
 {
     int t;
 
-    if(R==1 && b[i].wt>0)       
+    if(R==1 && b[i].wt_r>0)       
     {
-        if(b[i].wt + b[i].bt <= curr_time)
+        if(b[i].wt_r + b[i].bt_r <= curr_time)
         {
             t = 0;
         }    
         else
         {
-            t = b[i].wt + b[i].bt - curr_time;
+            t = b[i].wt_r + b[i].bt_r - curr_time;
         }
     }
     else if(R==1)            
     {
-        if(b[i].at + b[i].bt > curr_time)
-            t = b[i].at + b[i].bt - curr_time;
+        if(b[i].at_r + b[i].bt_r > curr_time)
+            t = b[i].at_r + b[i].bt_r - curr_time;
         else
             t = 0;
     }
     else
-        t = b[i].bt;
+        t = b[i].bt_r;
 
     curr_time += t;
 
-    if(b[i].wt == 0)
+    if(b[i].wt_r == 0)
     {
-        b[i].start_t = b[i].at;
-        b[i].ct = b[i].at + b[i].bt;
+        b[i].start_t_r = b[i].at_r;
+        b[i].ct_r = b[i].at_r + b[i].bt_r;
     }
     else
     {
-        b[i].start_t = b[i].wt;
-        b[i].ct = b[i].wt + b[i].bt;
+        b[i].start_t_r = b[i].wt_r;
+        b[i].ct_r = b[i].wt_r + b[i].bt_r;
     }
         
 
-    b[i].s = 1;
-    b[i].w = -1;
+    b[i].s_r = 1;
+    b[i].w_r = -1;
 
     return curr_time;
 }
@@ -272,7 +272,7 @@ int readers_priority(void)
 
     //S: semaphore variable
     //curr_time: current time
-    //R: indicates whether a reader_reader is reading or writer_reader is writing
+    //R: indicates whether a reader is reading or reader is writing
 
     cout<<"Enter number of reader_readers: ";
     cin>>m;
@@ -284,12 +284,12 @@ int readers_priority(void)
         for(i=0;i<m;i++)
         {
             cout << "\nReader " << i+1 <<" arrival time: ";
-            cin >> r[i].at;
+            cin >> r[i].at_r;
             cout << "Reader " << i+1 <<" burst time  : ";
-            cin >> r[i].bt;
+            cin >> r[i].bt_r;
 
-            r[i].wr = 0;
-            r[i].index = i;
+            r[i].wr_r = 0;
+            r[i].index_r = i;
 
         }
 
@@ -305,12 +305,12 @@ int readers_priority(void)
         for(i=0;i<n;i++)
         {
             cout << "\nWriter " << i+1 <<" arrival time: ";
-            cin >> w[i].at;
+            cin >> w[i].at_r;
             cout << "Writer " << i+1 <<" burst time  : ";
-            cin >> w[i].bt;
+            cin >> w[i].bt_r;
 
-            w[i].wr = 1;
-            w[i].index = i;
+            w[i].wr_r = 1;
+            w[i].index_r = i;
 
         }
 
@@ -336,7 +336,7 @@ int readers_priority(void)
 
     for(i=0 ; i<n+m;)
     {
-        if(b[i].s == 1)
+        if(b[i].s_r == 1)
         {
             i++;
             continue;
@@ -344,26 +344,26 @@ int readers_priority(void)
         
         mark = i;
         
-        if(b[i].wr==1)
+        if(b[i].wr_r==1)
         {
-            for(j=i+1; b[j].w != 0 ;j++)
+            for(j=i+1; b[j].w_r != 0 ;j++)
             {
-                if(b[j].s == 1 )
+                if(b[j].s_r == 1 )
                     continue;
-                if(b[j].wr == 0)
+                if(b[j].wr_r == 0)
                 {
                     i = j;
                     R = 1;
                     wait_reader(S);
-                    curr_time = reader_reader(R,b,b[i].index,i,curr_time);
+                    curr_time = reader_reader(R,b,b[i].index_r,i,curr_time);
                     signal_reader(S);
                     R = 1;
-                    if(b[i].start_t == b[i].at)
-                        cout<<"Reader "<< b[i].index+1 <<" arrived at time " << b[i].start_t << " and started reading.\n " <<endl;
+                    if(b[i].start_t_r == b[i].at_r)
+                        cout<<"Reader "<< b[i].index_r+1 <<" arrived at time " << b[i].start_t_r << " and started reading.\n " <<endl;
                     else
-                        cout<<"Reader "<< b[i].index+1 <<" started reading at time "<< b[i].start_t << ".\n" <<endl;
-                    head = enqueue_reader_reader(b[i].ct, b[i].index, head);
-                    b[i].q = 1;
+                        cout<<"Reader "<< b[i].index_r+1 <<" started reading at time "<< b[i].start_t_r << ".\n" <<endl;
+                    head = enqueue_reader_reader(b[i].ct_r, b[i].index_r, head);
+                    b[i].q_r = 1;
                     break;
                 }    
             }
@@ -371,73 +371,73 @@ int readers_priority(void)
             {
                 R = 0;
                 wait_reader(S);
-                curr_time = writer_reader(b,b[i].index,i, curr_time);
+                curr_time = writer_reader(b,b[i].index_r,i, curr_time);
                 signal_reader(S);
             }
         }   
         else
         {
             wait_reader(S);
-            curr_time = reader_reader(R,b,b[i].index,i,curr_time);
+            curr_time = reader_reader(R,b,b[i].index_r,i,curr_time);
             signal_reader(S);
             R = 1;
-            if(b[i].start_t == b[i].at)
-                cout<<"Reader "<< b[i].index+1 <<" arrived at time " << b[i].start_t << " and started reading.\n " <<endl;
+            if(b[i].start_t_r == b[i].at_r)
+                cout<<"Reader "<< b[i].index_r+1 <<" arrived at time " << b[i].start_t_r << " and started reading.\n " <<endl;
             else
-                cout<<"Reader "<< b[i].index+1 <<" started reading at time "<< b[i].start_t << ".\n" <<endl;
-            head = enqueue_reader_reader(b[i].ct, b[i].index, head);
-            b[i].q = 1;
+                cout<<"Reader "<< b[i].index_r+1 <<" started reading at time "<< b[i].start_t_r << ".\n" <<endl;
+            head = enqueue_reader_reader(b[i].ct_r, b[i].index_r, head);
+            b[i].q_r = 1;
         }
 
         t = 0;
-        for(j=0; b[j].at <= curr_time && j<n+m;j++)
+        for(j=0; b[j].at_r <= curr_time && j<n+m;j++)
         {    
-            if(b[j].s == 1)
+            if(b[j].s_r == 1)
                 continue;
-            if(b[j].wr == 0 && R==1)
+            if(b[j].wr_r == 0 && R==1)
             {
                 wait_reader(S);
-                curr_time = reader_reader(R,b,b[j].index,j,curr_time);
+                curr_time = reader_reader(R,b,b[j].index_r,j,curr_time);
                 signal_reader(S);
 
-                while(head != NULL && head->ct <= b[j].start_t)
+                while(head != NULL && head->ct <= b[j].start_t_r)
                     head = dequeue_reader_reader(head);
-                if(b[j].start_t == b[j].at)
-                    cout<<"Reader "<< b[j].index+1 <<" arrived at time " << b[j].start_t << " and started reading.\n " <<endl;
+                if(b[j].start_t_r == b[j].at_r)
+                    cout<<"Reader "<< b[j].index_r+1 <<" arrived at time " << b[j].start_t_r << " and started reading.\n " <<endl;
                 else
-                    cout<<"Reader "<< b[j].index+1 <<" started reading at time "<< b[j].start_t << ".\n" <<endl;
+                    cout<<"Reader "<< b[j].index_r+1 <<" started reading at time "<< b[j].start_t_r << ".\n" <<endl;
                 R = 1;
-                head = enqueue_reader_reader(b[j].ct, b[j].index, head);
-                b[j].q = 1;
+                head = enqueue_reader_reader(b[j].ct_r, b[j].index_r, head);
+                b[j].q_r = 1;
                 continue;
             }
-            else if(b[j].w == 1)
+            else if(b[j].w_r == 1)
             {
-                b[j].wt = curr_time;
+                b[j].wt_r = curr_time;
                 continue;
             }
-            else if(b[j].wr == 1)
+            else if(b[j].wr_r == 1)
             {
-                while(head != NULL && head->ct <= b[j].at)
+                while(head != NULL && head->ct <= b[j].at_r)
                     head = dequeue_reader_reader(head);
-                cout << "Writer "<< b[j].index + 1 << " arrived at time " << b[j].at << " and has to wait_reader.\n"<<endl;
-                b[j].w = 1;
+                cout << "Writer "<< b[j].index_r + 1 << " arrived at time " << b[j].at_r << " and has to wait_reader.\n"<<endl;
+                b[j].w_r = 1;
             }
-            else if(b[j].wr==0 && b[j].at < curr_time)
+            else if(b[j].wr_r==0 && b[j].at_r < curr_time)
             {
-                cout << "Reader "<< b[j].index + 1 << " arrived at time " << b[j].at << " and has to wait_reader.\n"<<endl;
-                b[j].w =1;
+                cout << "Reader "<< b[j].index_r + 1 << " arrived at time " << b[j].at_r << " and has to wait_reader.\n"<<endl;
+                b[j].w_r =1;
             }
-            else if(b[j].wr==0)
+            else if(b[j].wr_r==0)
             {
-                b[j].w = 1;
+                b[j].w_r = 1;
             }
 
-            b[j].wt = curr_time;  
+            b[j].wt_r = curr_time;  
         }
 
-        if(b[i].wr == 1)
-            cout<< "Writer "<< b[i].index +1 <<" finished writing at time "<<  b[i].ct << ".\n" << endl;
+        if(b[i].wr_r == 1)
+            cout<< "Writer "<< b[i].index_r +1 <<" finished writing at time "<<  b[i].ct_r << ".\n" << endl;
         else
         {
             while (head!= NULL)
